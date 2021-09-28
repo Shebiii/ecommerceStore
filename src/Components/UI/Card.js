@@ -13,16 +13,16 @@ function Card(props) {
         
 	}
     return (
-        <>
-    <div class="card1" key={props.key}>
-        <NavLink to={`/product/${props.id}`}><img src={props.url} alt={props.alt}  /></NavLink>
+    <div className="card1" key={props.id}>
+        <NavLink to={`/product/${props.id}`}>
+            <img src={props.url} alt={props.alt}  />
+        </NavLink>
         <h1>{props.name}</h1>
-        <p class="price">${props.price}</p>
+        <p className="price">${props.price}</p>
         <p>{props.description}</p>
         {props.productQuantity > 0 ? <p className="text-success">Instock</p> : <p className='text-danger'>Out of stock</p>}
-        {props.isexist ? <NavLink to="/cart"><button>Add to art</button></NavLink> : <p><button onClick={clickHandler}>Add to Cart</button></p>}
+        <p><button onClick={clickHandler}>Add to Cart</button></p>
     </div>
-</>
 )
 }
 

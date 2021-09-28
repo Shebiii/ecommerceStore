@@ -23,13 +23,17 @@ function Table() {
                     <td><img src={product.url} className="img-fluid" width="35" alt="product"/></td>
                         <td>{product.name}</td>
                         {product.quantity < product.productQuantity ?
-                            <td><a href="#" className="text-success" onClick={() => dispatch(cartAction.additemtocart({ id: product.id, price: product.price }))}><i className="fa fa-plus" aria-hidden="true"></i></a></td>
+                            <td>
+                                <span className="btn-outline-primary" onClick={() => dispatch(cartAction.additemtocart({ id: product.id, price: product.price }))}>
+                                <i className="fa fa-plus" aria-hidden="true"></i>
+                                </span>
+                            </td>
                             :
-                            <td className="text-danger">limit reached</td>
+                            <td className="text-danger">Stock maxed</td>
                         }
 
-                        <td><div className="form-group mb-0">  <h5 >{product.quantity}</h5></div></td>
-                            <td><a href="#" className="text-danger" onClick={()=>dispatch(cartAction.removeItemtocart(product.id))} ><i className="fa fa-minus" aria-hidden="true"></i></a></td>
+                        <td><div className="form-group mb-0">  <h5>{product.quantity < product.productQuantity ? product.quantity : product.productQuantity }</h5></div></td>
+                            <td><span className="btn-outline-danger" onClick={()=>dispatch(cartAction.removeItemtocart(product.id))} ><i className="fa fa-minus" aria-hidden="true"></i></span></td>
             
                     <td>${product.price}</td>
                     <td className="text-right">${product.price * product.quantity}</td>

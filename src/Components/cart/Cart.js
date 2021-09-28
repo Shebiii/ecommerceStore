@@ -9,8 +9,8 @@ function Cart() {
     return (
         
         <div className="row">
-            <div className="col-md-12 bg-dark">
-              <div className="card  ">
+            <div className="col-md-12 bg-dark col-md-12">
+              <div className="card col-md-12">
                     {total !== 0 &&  <div className="card-header ">
                         <h5 className="card-title ">Cart</h5>
                     </div>}     
@@ -49,7 +49,7 @@ function Cart() {
                         </div>
                     </div>
                     :
-                    <div><h3 className="text-danger">the cart is empty</h3>
+                    <div><h3 className="text-danger">THE CART IS EMPTY</h3>
                     <NavLink to="/product"><button className="btn btn-dark">back to shopping</button></NavLink></div>
                     }
                 </div>

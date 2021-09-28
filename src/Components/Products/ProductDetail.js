@@ -7,8 +7,7 @@ import './ProductDetail.css'
 export default function ProductDetail() {
 	const parm = useParams();
 	const productDetails = useSelector(state => state.product.items)
-
-	const data = productDetails.filter(items => items.id == parm.id)
+	const data = productDetails.filter(items => items.id === parseInt(parm.id))
 	const dispatch = useDispatch()
 	function clickHandler(e) {
 		dispatch(cartAction.additemtocart({
@@ -20,9 +19,6 @@ export default function ProductDetail() {
 			productQuantity : data[0].productQuantity
 
 		}))
-	}
-	function addToWishList(e) {
-		e.preventDefault()
 	}
     return (
 	<div className="container">
@@ -44,9 +40,7 @@ export default function ProductDetail() {
 							? <NavLink to="/cart"><button className="add-to-cart btn btn-default" type="button"  onClick={clickHandler}>add to cart</button></NavLink>
 							: <button className="add-to-cart btn btn-default disabled" type="button">Out of stock</button>		
 							}
-							
-							<button className="like btn btn-default" value={data[0].id} onClick={addToWishList} type="button"><span className="fa fa-heart"></span></button>	
-				</div>
+						</div>
 				</div>
 				</div>
 			</div>

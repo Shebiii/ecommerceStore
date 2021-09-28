@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Redirect } from "react-router-dom";
-
+// import Axios from 'axios'
 const userValidation = createSlice({
     name: 'user',
     initialState: {

@@ -1,5 +1,6 @@
+// import Axios from 'axios'
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { NavLink, useHistory } from 'react-router-dom'
 import { userAction } from '../../store/user'
 import Form from '../UI/Form'
@@ -12,9 +13,18 @@ function Login() {
     let history = useHistory()
     function submitHandler(e){
       e.preventDefault()
+    //   try{
+    //         Axios.post("https://localhost:8080/signIn",{username , password} )
+    //         console.log("userwas created")
+    //     }catch{
+    //         console.log("userwas created")
+    //     }
+
       dispatch(userAction.login({ username,password}))
       history.push("/product")
+      
     }
+
     return (
         <Form>
             <div className="col-lg-6">
