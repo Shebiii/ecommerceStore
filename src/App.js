@@ -6,6 +6,7 @@ import './App.css';
 import { PrivateRoute } from './Routers/PrivateRoute';
 import { PublicRoute } from './Routers/PublicRoute';
 import Login from './Components/Login/Login';
+import Form from './Components/UI/Form';
 
 const Products = React.lazy(()=>import('./Components/Products/Products'));
 const ProductDetail = React.lazy(()=>import('./Components/Products/ProductDetail'));
@@ -20,9 +21,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         
-      <Suspense fallback={<div classname="container"><img src="https://cdn.dribbble.com/users/1186261/screenshots/3718681/_______.gif" className="rounded mx-auto d-block ml-5" alt="123"></img></div>}>
+      <Suspense fallback={<Form><img src="https://cdn.dribbble.com/users/1186261/screenshots/3718681/_______.gif" className="center" alt="123"></img></Form>}>
         <Switch>
-          
         <PrivateRoute path="/product/:id" component={ProductDetail}/>
         <PrivateRoute path="/cart" component={Cart}/>
         <PrivateRoute path="/add-product" component={Addproduct} />
