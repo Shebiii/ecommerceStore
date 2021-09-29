@@ -5,6 +5,7 @@ import { NavLink, useHistory } from 'react-router-dom'
 import { userAction } from '../../store/user'
 import Form from '../UI/Form'
 import FormField from '../UI/FormField'
+import '../Signup/signup.css'
 
 function Login() {
     const [username, setUsername] = useState()

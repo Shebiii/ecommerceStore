@@ -9,10 +9,10 @@ function Cart() {
     return (
         
         <div className="row">
-            <div className="col-md-12 bg-dark col-md-12">
+            <div className="col-md-12 bg-dark ">
               <div className="card col-md-12">
                     {total !== 0 &&  <div className="card-header ">
-                        <h5 className="card-title ">Cart</h5>
+                        <h5 className="card-title">Cart</h5>
                     </div>}     
                    {total !== 0 ? <div className="card-body">
                         <div className="row justify-content-center">
