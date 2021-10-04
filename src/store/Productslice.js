@@ -20,12 +20,10 @@ const productslice = createSlice({
     setProduct(state, action) {
       const newProduct = action.payload
       state.items = newProduct
-      console.log(newProduct)
     },
     Wishlist(state, action) {
       const newProduct = action.payload
       state.items[newProduct.id].wish = !state.items[newProduct.id].wish
-      console.log(state.items[newProduct.id].wish)
     },
   },
 })

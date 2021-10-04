@@ -19,25 +19,25 @@ function Card(props) {
     )
   }
   return (
-    <div class="card col-12 col-sm-12 col-md-5 col-lg-5 mx-3 my-4">
+    <div className="card col-12 col-sm-12 col-md-5 col-lg-5 mx-3 my-4">
       <NavLink to={`/product/${props.id}`}>
-        <div class="imgBx">
-          <img src="https://assets.codepen.io/4164355/shoes.png" />
+        <div className="imgBx">
+          <img src="https://assets.codepen.io/4164355/shoes.png" alt="" />
         </div>
       </NavLink>
-      <div class="contentBx">
+      <div className="contentBx">
         <h2>{props.name}</h2>
-        <div class="size">
+        <div className="size">
           <h3>Price : ${props.price}</h3>
         </div>
-        <div class="color">
+        <div className="color">
           {props.productQuantity > 0 ? (
             <h3 className="text-success">Instock</h3>
           ) : (
             <h3 className="text-danger">Out OF Stock</h3>
           )}
         </div>
-        <a onClick={clickHandler}>Buy Now</a>
+        <span onClick={clickHandler}>Buy Now</span>
       </div>
     </div>
   )

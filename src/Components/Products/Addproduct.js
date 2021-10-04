@@ -1,15 +1,13 @@
 import React, { useState } from "react"
-import { useDispatch } from "react-redux"
 import { NavLink, useHistory } from "react-router-dom"
 import { ProductService } from "../../Services/Services"
 import Form from "../UI/Form"
 import FormField from "../UI/FormField"
 
 function Addproduct() {
-  const [id, setId] = useState()
   const [price, setPrice] = useState()
   const [quantity, setQuantity] = useState()
-  const [description, setDescription] = useState()
+  // const [description, setDescription] = useState()
   const [url, setUrl] = useState()
   const [name, setName] = useState()
 

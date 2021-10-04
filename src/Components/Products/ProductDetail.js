@@ -7,8 +7,6 @@ export default function ProductDetail() {
   const parm = useParams()
   const productDetails = useSelector((state) => state.product.items)
   const data = productDetails.filter((items) => items.id === parm.id)
-  console.log("productdetails", productDetails)
-  console.log("product", data)
   const dispatch = useDispatch()
   function clickHandler(e) {
     dispatch(
@@ -37,7 +35,7 @@ export default function ProductDetail() {
           {data[0].quantity ? (
             <NavLink to="/cart">
               <div class="button" onClick={clickHandler}>
-                <a href="#">{data[0].price}</a>
+                <span>{data[0].price}</span>
                 <a class="cart-btn" href="/cart">
                   <i class="cart-icon ion-bag"></i>ADD TO CART
                 </a>
@@ -45,10 +43,10 @@ export default function ProductDetail() {
             </NavLink>
           ) : (
             <div class="button" disabled>
-              <a href="#">{data[0].price}</a>
-              <a class="cart-btn">
+              <span>{data[0].price}</span>
+              <span class="cart-btn">
                 <i class="cart-icon ion-bag text-danger"></i>Out of stock
-              </a>
+              </span>
             </div>
           )}
         </div>
@@ -56,6 +54,7 @@ export default function ProductDetail() {
           src={data[0].imageUrl}
           width="300px"
           class="img1 animated fadeInRight"
+          alt=""
         />
       </div>
     </div>
