@@ -1,18 +1,14 @@
-import React from 'react'
-
-
+import React from "react";
 
 export default function Form(props) {
-   
-    return (
+  return (
     <div className="container-fluid px-5  px-xl-5  mt-5 mx-auto">
-    <div className="card card0 border-0">
+      <div className="card card0 border-0">
         <div className="row d-flex">
-            <div className="col-lg-3">
-            </div>
-            {props.children}
+          <div className="col-lg-3"></div>
+          {props.children}
         </div>
-        </div>
-        </div>
-    )
+      </div>
+    </div>
+  );
 }
