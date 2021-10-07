@@ -7,7 +7,7 @@ import "./Cart.css"
 function Cart() {
   const total = useSelector((state) => state.cart.totalPrice)
   return (
-    <div className="row cart-container">
+    <div className="row cart-container ">
       <div className="col-md-12  ">
         <div className="card col-md-8 mx-auto">
           {total !== 0 && (
@@ -48,23 +48,24 @@ function Cart() {
                       </div>
                     </div>
                     <div className="cart-footer text-right md-12">
-                      <a
-                        href="page-checkout.html"
-                        className="btn btn-dark my-1"
-                      >
+                      <NavLink to="/checkout" className="btn btn-dark my-1">
                         Proceed to Checkout
                         <i className="ri-arrow-right-line ml-2"></i>
-                      </a>
+                      </NavLink>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           ) : (
-            <div className>
-              <h3 className="text-danger">THE CART IS EMPTY</h3>
-              <NavLink to="/product">
-                <button className="btn btn-dark">back to shopping</button>
+            <div className="conatinerCart">
+              <p>
+                <h3 className="text-success cartCenter">THE CART IS EMPTY</h3>
+              </p>
+              <NavLink to="/product" className="text-decoration-none  ">
+                <span className="cartCenter ">
+                  <button className="btn btn-dark">back to shopping</button>
+                </span>
               </NavLink>
             </div>
           )}

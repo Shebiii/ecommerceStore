@@ -1,8 +1,8 @@
-import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import React from "react"
+import { Redirect, Route } from "react-router-dom"
 
 export const PublicRoute = ({ component: Component, ...rest }) => {
-  const isAuth = localStorage.getItem("token");
+  const isAuth = localStorage.getItem("token")
 
   return (
     <Route
@@ -17,5 +17,5 @@ export const PublicRoute = ({ component: Component, ...rest }) => {
         )
       }
     />
-  );
-};
+  )
+}

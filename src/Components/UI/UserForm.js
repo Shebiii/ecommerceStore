@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 
-export default function Form(props) {
+function UserForm(props) {
   return (
     <div className="container-fluid px-5  px-xl-5  mt-5 mx-auto">
       <div className="card card0 border-0">
@@ -10,5 +10,6 @@ export default function Form(props) {
         </div>
       </div>
     </div>
-  );
+  )
 }
+export default UserForm

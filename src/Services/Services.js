@@ -6,6 +6,7 @@ const config = {
     Authorization: "Bearer " + localStorage.getItem("token"),
   },
 }
+
 export const loginService = async (Username, password) => {
   try {
     return await axios.post(`${BASE_URL}/signIn`, {
@@ -26,11 +27,17 @@ export const SignupService = async (fullName, username, email, password) => {
       password,
     })
   } catch (error) {
-    return NETWORK_ERROR
+    return error
   }
 }
 
-export const ProductService = async (name, quantity, price, imageUrl) => {
+export const ProductService = async (
+  name,
+  quantity,
+  price,
+  imageUrl,
+  description
+) => {
   try {
     return await axios.post(
       `${BASE_URL}/products`,
@@ -39,6 +46,7 @@ export const ProductService = async (name, quantity, price, imageUrl) => {
         quantity,
         price,
         imageUrl,
+        description,
       },
       config
     )
@@ -49,7 +57,11 @@ export const ProductService = async (name, quantity, price, imageUrl) => {
 
 export const GetProductService = async () => {
   try {
-    return await axios.get(`${BASE_URL}/products`, config)
+    return await axios.get(`${BASE_URL}/products`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    })
   } catch (error) {
     return NETWORK_ERROR
   }

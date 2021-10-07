@@ -1,9 +1,14 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { cartAction } from "../../store/cartSlice";
+import React from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { cartAction } from "../../store/cartSlice"
 function Table() {
-  const dispatch = useDispatch();
-  const data = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch()
+  const data = useSelector((state) => state.cart.items)
+  const products = useSelector((state) => state.product.items)
+  const getSingleProductQuantity = (pid) => {
+    const product = products.find((product) => product.id === pid)
+    return product?.quantity
+  }
   return (
     <table className="table table-borderless">
       <thead>
@@ -31,7 +36,7 @@ function Table() {
               />
             </td>
             <td>{product.name}</td>
-            {product.quantity < product.productQuantity ? (
+            {product.quantity < getSingleProductQuantity(product.id) ? (
               <td>
                 <span
                   className="btn-outline-primary"
@@ -53,12 +58,7 @@ function Table() {
 
             <td>
               <div className="form-group mb-0">
-                {" "}
-                <h5>
-                  {product.quantity < product.productQuantity
-                    ? product.quantity
-                    : product.productQuantity}
-                </h5>
+                <h5>{product.quantity}</h5>
               </div>
             </td>
             <td>
@@ -78,7 +78,7 @@ function Table() {
         ))}
       </tbody>
     </table>
-  );
+  )
 }
 
-export default Table;
+export default Table

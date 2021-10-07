@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit"
 // import Axios from 'axios'
 const userValidation = createSlice({
   name: "user",
@@ -8,22 +8,22 @@ const userValidation = createSlice({
   },
   reducers: {
     login(state, action) {
-      const userinfo = action.payload;
+      const userinfo = action.payload
       if (userinfo.username === "shoaib" && userinfo.password === "1234") {
-        state.userLoggedin = true;
+        state.userLoggedin = true
         // localStorage.setItem("username", "username");
       } else {
-        alert("no record found please try again");
+        alert("no record found please try again")
       }
     },
 
     logout(state) {
-      state.userLoggedin = false;
-      localStorage.removeItem("token");
+      state.userLoggedin = false
+      localStorage.removeItem("token")
     },
 
     Adduser(state, action) {
-      const userinfo = action.payload;
+      const userinfo = action.payload
       if (userinfo.FullName !== undefined) {
         state.userDetail.push({
           FullName: userinfo.FullName,
@@ -31,13 +31,13 @@ const userValidation = createSlice({
           Email: userinfo.Email,
           password: userinfo.password,
           confirmPassword: userinfo.confirmPassword,
-        });
+        })
       } else {
-        console.log("enter something");
+        console.log("enter something")
       }
     },
   },
-});
+})
 
-export const userAction = userValidation.actions;
-export default userValidation;
+export const userAction = userValidation.actions
+export default userValidation

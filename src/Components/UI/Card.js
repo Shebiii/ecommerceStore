@@ -14,30 +14,35 @@ function Card(props) {
         totalPrice: props.price,
         name: props.name,
         url: props.url,
-        productQuantity: props.productQuantity,
+        productQuantity: 1,
       })
     )
   }
   return (
-    <div className="card col-12 col-sm-12 col-md-5 col-lg-5 mx-3 my-4">
-      <NavLink to={`/product/${props.id}`}>
-        <div className="imgBx">
-          <img src="https://assets.codepen.io/4164355/shoes.png" alt="" />
+    <div className="col-md-4 col-12 my-2">
+      <div className="card0 col-md-12 col-12">
+        <NavLink to={`/product/${props.id}`}>
+          <div className="imgBx">
+            <img src={props.url} alt="" />
+          </div>
+        </NavLink>
+        <div className="contentBx">
+          <h2>{props.name}</h2>
+          <div className="size0">
+            <h3>Price : ${props.price}</h3>
+          </div>
+          <div className="color">
+            {props.productQuantity > 0 ? (
+              <h3 className="text-success">Instock</h3>
+            ) : (
+              <h3 className="text-danger">Out OF Stock</h3>
+            )}
+          </div>
+
+          <NavLink to="/cart" onClick={clickHandler} className="text-success">
+            Buy Now
+          </NavLink>
         </div>
-      </NavLink>
-      <div className="contentBx">
-        <h2>{props.name}</h2>
-        <div className="size">
-          <h3>Price : ${props.price}</h3>
-        </div>
-        <div className="color">
-          {props.productQuantity > 0 ? (
-            <h3 className="text-success">Instock</h3>
-          ) : (
-            <h3 className="text-danger">Out OF Stock</h3>
-          )}
-        </div>
-        <span onClick={clickHandler}>Buy Now</span>
       </div>
     </div>
   )

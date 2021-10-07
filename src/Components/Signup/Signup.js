@@ -1,85 +1,137 @@
-import React, { useState } from "react"
+import React from "react"
 import { NavLink, useHistory } from "react-router-dom"
 import { SignupService } from "../../Services/Services"
-import Form from "../UI/Form"
 import FormField from "../UI/FormField"
 import "./signup.css"
+import FormsUser from "../UI/FormsUser"
+import { Formik, Form, ErrorMessage } from "formik"
+import * as Yup from "yup"
 
 export default function Signup() {
-  const [FullName, setFullname] = useState()
-  const [username, setUsername] = useState()
-  const [Email, setEmail] = useState()
-  const [password, setpassword] = useState()
-
   let history = useHistory()
 
-  function signupHandler(e) {
-    e.preventDefault()
-    if (username === undefined || password === undefined) {
-      history.push("/")
-    } else {
-      console.log("username =", username, password)
-      SignupService(FullName, username, Email, password)
-        .then((response) => {
-          console.log(response)
-          if (response.data.success) {
-            history.push("/login")
-          } else {
-            alert("Invalid Username or Password")
-            history.push("/")
-          }
-        })
-        .catch((err) => console.log(err))
-    }
+  const validationSchema = Yup.object({
+    Fullname: Yup.string().required("required"),
+    Username: Yup.string().required("required"),
+    Email: Yup.string().email("Please insert Valid email").required("required"),
+    Password: Yup.string()
+      .required("required")
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d.@$!%*#?&]{8,}$/,
+        "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+      ),
+  })
+  const initialValues = {
+    Fullname: "",
+    Username: "",
+    Email: "",
+    Password: "",
+  }
+
+  const onSubmit = (values, { setSubmitting }) => {
+    console.log(
+      "username =",
+      values.Username,
+      values.Password,
+      values.Email,
+      values.Fullname
+    )
+    SignupService(
+      values.Fullname,
+      values.Username,
+      values.Email,
+      values.Password
+    )
+      .then((response) => {
+        setSubmitting(false)
+        console.log(response)
+        if (response.data) {
+          alert(response.data.message)
+          history.push("/login")
+        } else {
+          setSubmitting(false)
+          alert(response)
+          // history.push("/signup")
+        }
+      })
+      .catch((err) => console.log(err))
   }
 
   return (
-    <Form>
-      <div className="col-lg-6">
-        <div className="card2 card border-0 px-4 py-5 my-5 ml-5">
-          <h1 className="text-primary"> Signup</h1>
-          <FormField
-            name="Fullname"
-            type="text"
-            stateFunction={setFullname}
-            placeholder="Enter a Full name"
-          />
-          <FormField
-            name="Username"
-            type="text"
-            stateFunction={setUsername}
-            placeholder="Enter a valid username"
-          />
-          <FormField
-            name="Email Address"
-            type="text"
-            stateFunction={setEmail}
-            placeholder="Enter EMAIL"
-          />
-          <FormField
-            name="Password"
-            type="text"
-            stateFunction={setpassword}
-            placeholder="Enter a Password"
-          />
-          <div className="row mb-3 px-3">
-            <button
-              type="submit"
-              className="btn btn-blue text-center"
-              onClick={signupHandler}
-            >
-              signup
-            </button>
-          </div>
-          <div className="row mb-3 px-3">
-            <NavLink to="./login">
-              <h5 className="mb-5 text-sm text-success">
-                Already have acoount... Login?
-              </h5>
-            </NavLink>
-          </div>
-        </div>
-      </div>
-    </Form>
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+      setSubmitting="false"
+    >
+      {(formik) => {
+        return (
+          <FormsUser>
+            <div className="col-lg-6">
+              <Form>
+                <div className="card2 card border-0 px-4 py-5 my-5 ml-5">
+                  <h2 className="text-primary mx-auto"> Signup</h2>
+                  <FormField
+                    name="Fullname"
+                    type="text"
+                    placeholder="Enter a Full name"
+                  />
+                  <ErrorMessage
+                    name="Fullname"
+                    component="div"
+                    className="text-danger"
+                  />
+                  <FormField
+                    name="Username"
+                    type="text"
+                    placeholder="Enter a valid username"
+                  />
+                  <ErrorMessage
+                    name="Username"
+                    component="div"
+                    className="text-danger"
+                  />
+                  <FormField
+                    name="Email"
+                    type="text"
+                    placeholder="Enter EMAIL"
+                  />
+                  <ErrorMessage
+                    name="Email"
+                    component="div"
+                    className="text-danger"
+                  />
+                  <FormField
+                    name="Password"
+                    type="text"
+                    placeholder="Enter a Password"
+                  />
+                  <ErrorMessage
+                    name="Password"
+                    component="div"
+                    className="text-danger"
+                  />
+                  <div className="row mb-3 px-3">
+                    <button
+                      type="submit"
+                      className="btn btn-blue text-center"
+                      disabled={!formik.isValid && formik.isSubmitting}
+                    >
+                      {formik.isSubmitting ? "loading..." : "Signup"}
+                    </button>
+                  </div>
+                  <div className="row mb-3 px-3">
+                    <h5 className="mb-5 text-sm text-success">
+                      Already have acoount...{" "}
+                      <NavLink to="./login">Login?</NavLink>
+                    </h5>
+                  </div>
+                </div>
+              </Form>
+            </div>
+          </FormsUser>
+        )
+      }}
+    </Formik>
   )
 }

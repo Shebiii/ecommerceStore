@@ -1,36 +1,25 @@
 import React, { Suspense } from "react"
 import { BrowserRouter, Switch } from "react-router-dom"
 import "./App.css"
-import Signup from "./Components/Signup/Signup"
-import ProductDetail from "./Components/Products/ProductDetail"
+import Loader from "./Components/UI/Loader"
 import { PrivateRoute } from "./Routers/PrivateRoute"
 import { PublicRoute } from "./Routers/PublicRoute"
-import Login from "./Components/Login/Login"
-import Form from "./Components/UI/Form"
-import Products from "./Components/Products/Products"
-import Addproduct from "./Components/Products/Addproduct"
-import Cart from "./Components/cart/Cart"
 
-// const Products = React.lazy(() => import("./Components/Products/Products"));
-// const ProductDetail = React.lazy(() => import("./Components/Products/ProductDetail"));
-// const Addproduct = React.lazy(() => import("./Components/Products/Addproduct"));
-// const Cart = React.lazy(() => import("./Components/cart/Cart"));
-// const Signup = React.lazy(() => import("./Components/Signup/Signup"));
+const Login = React.lazy(() => import("./Components/Login/Login"))
+const Checkout = React.lazy(() => import("./Components/CheckOut/Checkout"))
+const Products = React.lazy(() => import("./Components/Products/Products"))
+const ProductDetail = React.lazy(() =>
+  import("./Components/Products/ProductDetail")
+)
+const Addproduct = React.lazy(() => import("./Components/Products/Addproduct"))
+const Cart = React.lazy(() => import("./Components/cart/Cart"))
+const Signup = React.lazy(() => import("./Components/Signup/Signup"))
+
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-dark">
       <BrowserRouter>
-        <Suspense
-          fallback={
-            <Form>
-              <img
-                src="https://cdn.dribbble.com/users/1186261/screenshots/3718681/_______.gif"
-                className="center"
-                alt="123"
-              ></img>
-            </Form>
-          }
-        >
+        <Suspense fallback={<Loader />}>
           <Switch>
             <PrivateRoute path="/product/:id" component={ProductDetail} />
             <PrivateRoute path="/cart" component={Cart} />
@@ -38,6 +27,7 @@ function App() {
             <PrivateRoute path="/product" component={Products} />
             <PublicRoute path="/login" component={Login} />
             <PublicRoute path="/signup" component={Signup} />
+            <PrivateRoute path="/checkout" component={Checkout} />
             <PrivateRoute path="/" component={Products} />
           </Switch>
         </Suspense>

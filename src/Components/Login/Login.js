@@ -1,71 +1,94 @@
-// import Axios from 'axios'
-import React, { useState } from "react"
+import React from "react"
 import { NavLink, useHistory } from "react-router-dom"
-import Form from "../UI/Form"
+import FormsUser from "../UI/FormsUser"
 import FormField from "../UI/FormField"
 import "../Signup/signup.css"
 import { loginService } from "../../Services/Services.js"
+import { Formik, Form, ErrorMessage } from "formik"
+import * as Yup from "yup"
+
 function Login() {
-  const [username, setUsername] = useState()
-  const [password, setPassword] = useState()
-
-  let history = useHistory()
-
-  function submitHandler(e) {
-    e.preventDefault()
-    if (username === undefined || password === undefined) {
-      history.push("/")
-    } else {
-      console.log("username =", username, password)
-      loginService(username, password)
-        .then((response) => {
-          if (response.data.success) {
-            localStorage.setItem("token", response.data.token)
-            history.push("/product")
-          } else {
-            alert("Invalid Username or Password")
-            history.push("/")
-          }
-        })
-        .catch((err) => console.log(err))
-    }
+  const validationSchema = Yup.object({
+    username: Yup.string().required("required"),
+    Password: Yup.string().required("required"),
+  })
+  const initialValues = {
+    username: "",
+    Password: "",
   }
 
+  let history = useHistory()
+  const onSubmit = (values, { setSubmitting }) => {
+    console.log("username =", values.username, values.Password)
+    loginService(values.username, values.Password)
+      .then((response) => {
+        console.log("abc", response)
+        if (response.data) {
+          localStorage.setItem("token", response.data.token)
+          history.push("/product")
+        } else {
+          setSubmitting(false)
+          alert("Invalid Username or Password")
+          history.push("/")
+        }
+      })
+      .catch((err) => console.log(err))
+  }
   return (
-    <Form>
-      <div className="col-lg-6">
-        <form onSubmit={submitHandler}>
-          <div className="card2 card border-0 px-4 py-5 my-5 ml-5">
-            <h1 className="text-primary">Login</h1>
-            <FormField
-              name="username"
-              type="text"
-              stateFunction={setUsername}
-              placeholder="Enter Username"
-            />
-            <FormField
-              name="Password"
-              type="text"
-              stateFunction={setPassword}
-              placeholder="Enter Password"
-            />
+    <Formik
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
+      {(formik) => {
+        return (
+          <FormsUser>
+            <div className="col-lg-6">
+              <Form>
+                <div className="card2 card border-0 px-4 py-5 my-5 ml-5">
+                  <h2 className="text-primary mx-auto">Login</h2>
+                  <FormField
+                    name="username"
+                    type="text"
+                    placeholder="username"
+                  />
+                  <ErrorMessage
+                    name="username"
+                    component="div"
+                    className="text-danger"
+                  />
+                  <FormField
+                    name="Password"
+                    type="text"
+                    placeholder="Enter Password"
+                  />
+                  <ErrorMessage
+                    name="Password"
+                    component="div"
+                    className="text-danger"
+                  />
 
-            <div className="row mb-3 px-3">
-              <button type="submit" className="btn btn-blue text-center">
-                Login
-              </button>
+                  <div className="row mb-3 px-3">
+                    <button
+                      type="submit"
+                      className="btn btn-blue text-center"
+                      disabled={!formik.isValid && formik.isSubmitting}
+                    >
+                      {formik.isSubmitting ? "loading..." : "Login"}
+                    </button>
+                  </div>
+                  <div className="row mb-3 px-3">
+                    <h5 className="mb-5 text-sm text-dark">
+                      Need an Account <NavLink to="./signup">Signup</NavLink>
+                    </h5>
+                  </div>
+                </div>
+              </Form>
             </div>
-            <div className="row mb-3 px-3">
-              <NavLink to="./signup">
-                <h5 className="mb-5 text-sm text-dark">
-                  Need an Account Signup
-                </h5>
-              </NavLink>
-            </div>
-          </div>
-        </form>
-      </div>
-    </Form>
+          </FormsUser>
+        )
+      }}
+    </Formik>
   )
 }
 

@@ -5,101 +5,97 @@ import { cartAction } from "../../store/cartSlice"
 import "./ProductDetail.css"
 export default function ProductDetail() {
   const parm = useParams()
-  const productDetails = useSelector((state) => state.product.items)
-  const data = productDetails.filter((items) => items.id === parm.id)
+  const ProductDetails = useSelector((state) => state.product.items)
+  const data = ProductDetails.find((items) => items.id === parm.id)
+  console.log(data)
+  console.log("parm", parm)
   const dispatch = useDispatch()
   function clickHandler(e) {
     dispatch(
       cartAction.additemtocart({
-        id: data[0].id,
-        price: data[0].price,
-        totalPrice: data[0].price,
-        name: data[0].name,
-        url: data[0].imageUrl,
-        productQuantity: data[0].quantity,
+        id: data.id,
+        price: data.price,
+        totalPrice: data.price,
+        name: data.name,
+        url: data.imageUrl,
+        productQuantity: 1,
       })
     )
   }
   return (
-    <div class="wrapper">
-      <div class="outer">
-        <div class="content animated fadeInLeft">
-          <h1>
-            {data[0].name}
-            <br /> baseball hair
-          </h1>
-          <p>
-            Shadow your real allegiance to New York's Pirate radio with this
-            cool cap featuring the Graphic Know Wave logo.
-          </p>
-          {data[0].quantity ? (
-            <NavLink to="/cart">
-              <div class="button" onClick={clickHandler}>
-                <span>{data[0].price}</span>
-                <a class="cart-btn" href="/cart">
-                  <i class="cart-icon ion-bag"></i>ADD TO CART
-                </a>
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <div class="product-content product-wrap product-deatil">
+        <div class="row">
+          <div class="col-md-5 col-sm-12 col-xs-12">
+            <div class="product-image">
+              <div id="myCarousel-2" class="carousel slide">
+                <div class="carousel-inner">
+                  <div class="item active">
+                    <img
+                      src={data.imageUrl}
+                      class="img-responsive center w-100"
+                      alt=""
+                    />
+                  </div>
+                </div>
               </div>
-            </NavLink>
-          ) : (
-            <div class="button" disabled>
-              <span>{data[0].price}</span>
-              <span class="cart-btn">
-                <i class="cart-icon ion-bag text-danger"></i>Out of stock
-              </span>
             </div>
-          )}
+          </div>
+
+          <div class="col-md-6 col-md-offset-1 col-sm-12 col-xs-12 ">
+            <h2 class="name">
+              {data.name}
+              <small></small>
+              <i class="fa fa-star fa-2x text-success"></i>
+              <i class="fa fa-star fa-2x text-success"></i>
+              <i class="fa fa-star fa-2x text-success"></i>
+              <i class="fa fa-star fa-2x text-success"></i>
+              <i class="fa fa-star fa-2x text-success"></i>
+            </h2>
+            <hr />
+            <h3 class="price-container">
+              ${data.price}
+              <small>*includes tax</small>
+            </h3>
+            <div class="certified">
+              <ul>
+                <li>
+                  <a href="/cart">
+                    Delivery time<span>7 Working Days</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="/cart">
+                    Certified<span>Quality Assured</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <hr />
+            <div class="description description-tabs">
+              <br />
+              <strong>Description </strong>
+              <p>{data.description}</p>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-12 col-md-6 col-lg-6">
+                {data.quantity ? (
+                  <NavLink to="/cart">
+                    <span onClick={clickHandler} class="btn btn-success btn-lg">
+                      Add to cart (${data.price})
+                    </span>
+                  </NavLink>
+                ) : (
+                  <a href="/cart" class="btn btn-success btn-lg">
+                    Out of Stock (${data.price})
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-        <img
-          src={data[0].imageUrl}
-          width="300px"
-          class="img1 animated fadeInRight"
-          alt=""
-        />
       </div>
     </div>
-    // <div className="container">
-    //   <div className="card">
-    //     <div className="container-fliud">
-    //       <div className="wrapper row">
-    //         <div className="preview col-md-6">
-    //           <div className="preview-pic tab-content">
-    //             <div className="tab-pane active" id="pic-1">
-    //               <img src={data[0].imageUrl} alt="" />
-    //             </div>
-    //           </div>
-    //         </div>
-    //         <div className="details col-md-6">
-    //           <h3 className="product-title">{data[0].name}</h3>
-
-    //           <p className="product-description">{data[0].description}</p>
-    //           <h4 className="price">
-    //             current price: <span>{data[0].price}</span>
-    //           </h4>
-    //           <div className="action">
-    // {data[0].quantity ? (
-    //   <NavLink to="/cart">
-    //     <button
-    //       className="add-to-cart btn btn-default"
-    //       type="button"
-    //       onClick={clickHandler}
-    //     >
-    //       add to cart
-    //     </button>
-    //   </NavLink>
-    // ) : (
-    //   <button
-    //     className="add-to-cart btn btn-default disabled"
-    //     type="button"
-    //   >
-    //     Out of stock
-    //   </button>
-    // )}
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
   )
 }
