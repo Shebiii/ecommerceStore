@@ -70,7 +70,7 @@ export default function Signup() {
             <div className="col-lg-6">
               <Form>
                 <div className="card2 card border-0 px-4 py-5 my-5 ml-5">
-                  <h2 className="text-primary mx-auto"> Signup</h2>
+                  <h2 className="text-success mx-auto"> Signup</h2>
                   <FormField
                     name="Fullname"
                     type="text"
@@ -103,7 +103,7 @@ export default function Signup() {
                   />
                   <FormField
                     name="Password"
-                    type="text"
+                    type="password"
                     placeholder="Enter a Password"
                   />
                   <ErrorMessage
@@ -114,7 +114,7 @@ export default function Signup() {
                   <div className="row mb-3 px-3">
                     <button
                       type="submit"
-                      className="btn btn-blue text-center"
+                      className="btn btn-success text-center"
                       disabled={!formik.isValid && formik.isSubmitting}
                     >
                       {formik.isSubmitting ? "loading..." : "Signup"}

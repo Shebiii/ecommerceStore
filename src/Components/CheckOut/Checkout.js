@@ -17,9 +17,9 @@ function Checkout() {
     vanish()
   })
   return (
-    <section className="mb-5">
+    <section className="mb-5" style={{ height: "450px" }}>
       <div className="row ">
-        <div className="col-4 text-white display-3 center">
+        <div className="col-4 text-success display-3 center mt-5">
           YOUR ORDER HAS BEEN PLACED SUCCESFULLY
         </div>
       </div>

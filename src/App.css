@@ -4,3 +4,17 @@
   margin-right: auto;
   width: 50%;
 }
+.loaderContainer {
+  width: 500px;
+  height: 500px;
+  margin-left: 250px;
+  margin-top: 150px;
+}
+@media only screen and (max-width: 600px) {
+  .loaderContainer {
+    width: 250px;
+    height: 250px;
+    margin-left: 125px;
+    margin-top: 75px;
+  }
+}

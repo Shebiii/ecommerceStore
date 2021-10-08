@@ -17,7 +17,7 @@ const Cart = createSlice({
         state.items.push({
           id: newitem.id,
           price: newitem.price,
-          quantity: newitem.productQuantity,
+          quantity: 1,
           name: newitem.name,
           url: newitem.url,
         })
@@ -37,6 +37,7 @@ const Cart = createSlice({
         state.totalPrice = state.totalPrice - existingItem.price
       } else {
         existingItem.quantity--
+        state.totalquantity--
         state.totalPrice = state.totalPrice - existingItem.price
       }
     },

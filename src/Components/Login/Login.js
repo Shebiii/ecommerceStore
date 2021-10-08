@@ -19,7 +19,6 @@ function Login() {
 
   let history = useHistory()
   const onSubmit = (values, { setSubmitting }) => {
-    console.log("username =", values.username, values.Password)
     loginService(values.username, values.Password)
       .then((response) => {
         console.log("abc", response)
@@ -46,7 +45,7 @@ function Login() {
             <div className="col-lg-6">
               <Form>
                 <div className="card2 card border-0 px-4 py-5 my-5 ml-5">
-                  <h2 className="text-primary mx-auto">Login</h2>
+                  <h2 className="text-success mx-auto">Login</h2>
                   <FormField
                     name="username"
                     type="text"
@@ -59,7 +58,7 @@ function Login() {
                   />
                   <FormField
                     name="Password"
-                    type="text"
+                    type="password"
                     placeholder="Enter Password"
                   />
                   <ErrorMessage
@@ -71,14 +70,14 @@ function Login() {
                   <div className="row mb-3 px-3">
                     <button
                       type="submit"
-                      className="btn btn-blue text-center"
+                      className="btn btn-success text-center"
                       disabled={!formik.isValid && formik.isSubmitting}
                     >
                       {formik.isSubmitting ? "loading..." : "Login"}
                     </button>
                   </div>
                   <div className="row mb-3 px-3">
-                    <h5 className="mb-5 text-sm text-dark">
+                    <h5 className="mb-5 text-sm text-success">
                       Need an Account <NavLink to="./signup">Signup</NavLink>
                     </h5>
                   </div>

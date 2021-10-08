@@ -17,6 +17,7 @@
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   max-width: 104% !important;
+  z-index: -1;
 }
 
 .m-t-20 {
@@ -122,10 +123,12 @@ div {
 
 .bbb_deals_image {
   width: 100%;
+  z-index: -1;
 }
 
 .bbb_deals_image img {
   width: 100%;
+  z-index: -1;
 }
 
 .bbb_deals_content {

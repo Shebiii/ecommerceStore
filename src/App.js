@@ -19,7 +19,13 @@ function App() {
   return (
     <div className="App bg-dark">
       <BrowserRouter>
-        <Suspense fallback={<Loader />}>
+        <Suspense
+          fallback={
+            <div className="loaderContainer">
+              <Loader />
+            </div>
+          }
+        >
           <Switch>
             <PrivateRoute path="/product/:id" component={ProductDetail} />
             <PrivateRoute path="/cart" component={Cart} />

@@ -26,15 +26,6 @@ function Addproduct() {
   }
 
   const onSubmit = (values, { setSubmitting }) => {
-    console.log(
-      "Values =",
-      values.ProductName,
-      values.ProductPrice,
-      values.ProductQuantity,
-      values.ProductURL,
-      values.ProductDescription
-    )
-
     ProductService(
       values.ProductName,
       parseInt(values.ProductQuantity),
@@ -70,7 +61,7 @@ function Addproduct() {
             <div className="col-lg-6">
               <Form>
                 <div className="card2 card border-0 px-4 py-5 my-5 ml-5">
-                  <h1 className="text-primary"> ADD Product </h1>
+                  <h1 className="text-success"> ADD Product </h1>
                   <FormField
                     name="ProductName"
                     type="text"
@@ -125,7 +116,7 @@ function Addproduct() {
                   <div className="row mb-3 px-3">
                     <button
                       type="submit"
-                      className="btn btn-blue text-center"
+                      className="btn btn-success text-center"
                       disabled={!formik.isValid && formik.isSubmitting}
                     >
                       {formik.isSubmitting ? "loading..." : "Add Product"}

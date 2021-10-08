@@ -6,10 +6,14 @@ import Card from "../UI/Card"
 import Loader from "../UI/Loader"
 import "./Products.css"
 import Error from "../UI/Error"
-export default function Products() {
+import { cartAction } from "../../store/cartSlice"
+
+function Products() {
+  const data = useSelector((state) => state.product.items)
+
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
-  const fetchProducts = async () => {
+  const fetchProducts = () => {
     setLoading(true)
     GetProductService()
       .then((response) => {
@@ -25,27 +29,50 @@ export default function Products() {
   }
   useEffect(() => {
     fetchProducts()
-  })
+  }, [])
+  const CartData = useSelector((state) => state.cart.items)
 
-  const data = useSelector((state) => state.product.items)
-
+  const isItemExist = (id) => {
+    let itemExist = CartData.filter((element) => id === element.id)
+    if (itemExist[0]) {
+      return true
+    } else {
+      return false
+    }
+  }
+  const clickHandler = (item) => {
+    if (!isItemExist(item.id)) {
+      dispatch(
+        cartAction.additemtocart({
+          id: item.id,
+          price: item.price,
+          totalPrice: item.price,
+          name: item.name,
+          url: item.url,
+          productQuantity: 1,
+        })
+      )
+    }
+  }
   return (
-    <div className="container h-100 p-5">
+    <div className="container">
       <div className="row p-2">
         {data && data.length === 0 ? (
-          <div className="col-md-6 center">
+          <>
             {loading ? (
               <Loader />
             ) : (
-              <Error>
-                <h1>we are sorry</h1>
-                <hr />
-                <h1>NO item were found</h1>
-                <hr />
-                <h3>Error 404</h3>
-              </Error>
+              <div className="col-md-6 center">
+                <Error>
+                  <h1>we are sorry</h1>
+                  <hr />
+                  <h1>NO item were found</h1>
+                  <hr />
+                  <h3>Error 404</h3>
+                </Error>
+              </div>
             )}
-          </div>
+          </>
         ) : (
           data.map((post) => (
             <Card
@@ -55,6 +82,7 @@ export default function Products() {
               name={post.name}
               price={post.price}
               productQuantity={post.quantity}
+              clickHandler={clickHandler}
             />
           ))
         )}
@@ -62,3 +90,5 @@ export default function Products() {
     </div>
   )
 }
+
+export default Products

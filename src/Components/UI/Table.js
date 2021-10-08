@@ -7,7 +7,7 @@ function Table() {
   const products = useSelector((state) => state.product.items)
   const getSingleProductQuantity = (pid) => {
     const product = products.find((product) => product.id === pid)
-    return product?.quantity
+    return product.quantity
   }
   return (
     <table className="table table-borderless">

@@ -3,9 +3,11 @@ import "./Loader.css"
 import "./Card.css"
 function Loader() {
   return (
-    <div className="containerloader">
-      <div className="center">
-        <div className="loader"></div>
+    <div className="col-md-6 center">
+      <div className="containerloader">
+        <div className="center">
+          <div className="loader"></div>
+        </div>
       </div>
     </div>
   )

@@ -1,22 +1,15 @@
 import React from "react"
-import { useDispatch } from "react-redux"
 import { NavLink } from "react-router-dom"
 import "./Card.css"
-import { cartAction } from "../../store/cartSlice"
 
 function Card(props) {
-  const dispatch = useDispatch()
-  function clickHandler(e) {
-    dispatch(
-      cartAction.additemtocart({
-        id: props.id,
-        price: props.price,
-        totalPrice: props.price,
-        name: props.name,
-        url: props.url,
-        productQuantity: 1,
-      })
-    )
+  const item = {
+    id: props.id,
+    price: props.price,
+    totalPrice: props.price,
+    name: props.name,
+    url: props.url,
+    productQuantity: 1,
   }
   return (
     <div className="col-md-4 col-12 my-2">
@@ -33,14 +26,17 @@ function Card(props) {
           </div>
           <div className="color">
             {props.productQuantity > 0 ? (
-              <h3 className="text-success">Instock</h3>
+              <h3 className="text-success">instock</h3>
             ) : (
               <h3 className="text-danger">Out OF Stock</h3>
             )}
           </div>
-
-          <NavLink to="/cart" onClick={clickHandler} className="text-success">
-            Buy Now
+          <NavLink
+            to="/cart"
+            onClick={() => props.clickHandler(item)}
+            className="text-success"
+          >
+            buyNow
           </NavLink>
         </div>
       </div>

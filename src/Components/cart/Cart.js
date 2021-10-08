@@ -62,7 +62,7 @@ function Cart() {
               <p>
                 <h3 className="text-success cartCenter">THE CART IS EMPTY</h3>
               </p>
-              <NavLink to="/product" className="text-decoration-none  ">
+              <NavLink to="/product" className="text-decoration-none ">
                 <span className="cartCenter ">
                   <button className="btn btn-dark">back to shopping</button>
                 </span>

@@ -7,10 +7,9 @@ export default function ProductDetail() {
   const parm = useParams()
   const ProductDetails = useSelector((state) => state.product.items)
   const data = ProductDetails.find((items) => items.id === parm.id)
-  console.log(data)
-  console.log("parm", parm)
+
   const dispatch = useDispatch()
-  function clickHandler(e) {
+  const clickHandler = (e) => {
     dispatch(
       cartAction.additemtocart({
         id: data.id,
@@ -23,17 +22,17 @@ export default function ProductDetail() {
     )
   }
   return (
-    <div class="col-sm-12 col-md-12 col-lg-12">
-      <div class="product-content product-wrap product-deatil">
-        <div class="row">
-          <div class="col-md-5 col-sm-12 col-xs-12">
-            <div class="product-image">
-              <div id="myCarousel-2" class="carousel slide">
-                <div class="carousel-inner">
-                  <div class="item active">
+    <div className="col-sm-12 col-md-12 col-lg-12">
+      <div className="product-content product-wrap product-deatil">
+        <div className="row">
+          <div className="col-md-5 col-sm-12 col-xs-12">
+            <div className="product-image">
+              <div id="myCarousel-2" className="carousel slide">
+                <div className="carousel-inner">
+                  <div className="item active">
                     <img
                       src={data.imageUrl}
-                      class="img-responsive center w-100"
+                      className="img-responsive center w-100"
                       alt=""
                     />
                   </div>
@@ -42,22 +41,22 @@ export default function ProductDetail() {
             </div>
           </div>
 
-          <div class="col-md-6 col-md-offset-1 col-sm-12 col-xs-12 ">
-            <h2 class="name">
+          <div className="col-md-6 col-md-offset-1 col-sm-12 col-xs-12 ">
+            <h2 className="name">
               {data.name}
               <small></small>
-              <i class="fa fa-star fa-2x text-success"></i>
-              <i class="fa fa-star fa-2x text-success"></i>
-              <i class="fa fa-star fa-2x text-success"></i>
-              <i class="fa fa-star fa-2x text-success"></i>
-              <i class="fa fa-star fa-2x text-success"></i>
+              <i className="fa fa-star fa-2x text-success"></i>
+              <i className="fa fa-star fa-2x text-success"></i>
+              <i className="fa fa-star fa-2x text-success"></i>
+              <i className="fa fa-star fa-2x text-success"></i>
+              <i className="fa fa-star fa-2x text-success"></i>
             </h2>
             <hr />
-            <h3 class="price-container">
+            <h3 className="price-container">
               ${data.price}
               <small>*includes tax</small>
             </h3>
-            <div class="certified">
+            <div className="certified">
               <ul>
                 <li>
                   <a href="/cart">
@@ -72,22 +71,25 @@ export default function ProductDetail() {
               </ul>
             </div>
             <hr />
-            <div class="description description-tabs">
+            <div className="description description-tabs">
               <br />
               <strong>Description </strong>
               <p>{data.description}</p>
             </div>
             <hr />
-            <div class="row">
-              <div class="col-sm-12 col-md-6 col-lg-6">
+            <div className="row">
+              <div className="col-sm-12 col-md-6 col-lg-6">
                 {data.quantity ? (
                   <NavLink to="/cart">
-                    <span onClick={clickHandler} class="btn btn-success btn-lg">
+                    <span
+                      onClick={clickHandler}
+                      className="btn btn-success btn-lg"
+                    >
                       Add to cart (${data.price})
                     </span>
                   </NavLink>
                 ) : (
-                  <a href="/cart" class="btn btn-success btn-lg">
+                  <a href="/cart" className="btn btn-success btn-lg">
                     Out of Stock (${data.price})
                   </a>
                 )}
