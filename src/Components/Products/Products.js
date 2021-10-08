@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { GetProductService } from "../../Services/Services"
 import { productAction } from "../../store/Productslice"
@@ -13,7 +13,7 @@ function Products() {
 
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
-  const fetchProducts = () => {
+  const fetchProducts = useCallback(() => {
     setLoading(true)
     GetProductService()
       .then((response) => {
@@ -26,10 +26,11 @@ function Products() {
         setLoading(false)
         console.log("Err: ", err)
       })
-  }
+  }, [dispatch])
+
   useEffect(() => {
     fetchProducts()
-  }, [])
+  }, [fetchProducts])
   const CartData = useSelector((state) => state.cart.items)
 
   const isItemExist = (id) => {
